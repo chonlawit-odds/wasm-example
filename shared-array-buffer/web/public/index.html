@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebAssembly with Go (SharedArrayBuffer)</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <div>
+      <button id="convert" onclick="convert()">Convert to Grayscale</button>
+    </div>
+
+    <script src="wasm_exec.js"></script>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+
+      img.src = "assets/wasm.png";
+      img.onload = () => {
+        // วาดรูปภาพลงใน canvas
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+
+      const go = new Go();
+      WebAssembly.instantiateStreaming(
+        fetch("main.wasm"),
+        go.importObject
+      ).then((result) => {
+        go.run(result.instance);
+      });
+
+      const convert = () => {
+        // Get image data from cancas
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        // Make SharedArrayBuffer from image data
+        const sharedBuffer = new SharedArrayBuffer(imageData.data.length);
+        const sharedView = new Uint8Array(sharedBuffer);
+        sharedView.set(imageData.data);
+
+        // Convert to grayscale
+        grayscale(sharedView.buffer);
+
+        // Set image data with shared buffer and put to canvas
+        imageData.data.set(sharedView);
+        ctx.putImageData(imageData, 0, 0);
+      };
+    </script>
+  </body>
+</html>

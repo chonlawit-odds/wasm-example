@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #tests {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+      }
+
+      #tests td,
+      #tests th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #tests tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      #tests tr:hover {
+        background-color: #ddd;
+      }
+
+      #tests th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+    <script src="app.js"></script>
+    <script src="wasm_exec.js"></script>
+    <!-- <script src="wasm_exec_tiny.js"></script> -->
+    <script src="preload.js"></script>
+    <script src="main.js"></script>
+    <title>WebAssembly x JavaScript</title>
+  </head>
+  <body>
+    <h1>WebAssembly Benchmark</h1>
+    <section id="sectionFibonacci">
+      <div>
+        <p>
+          This test executes the Fibonacci algorithm with 2 different ways:
+          JavaScript and TinyGo
+          <br />
+          Insert the number you want to find. It will execute the calculation 5
+          times and take the average.
+        </p>
+      </div>
+      <div>
+        <p>
+          <input
+            type="number"
+            id="numberFibonacci"
+            style="margin-right: 10px"
+            ;
+          />
+          <button id="runButtonFibonacci" onclick="startFibonacci()">
+            Run
+          </button>
+          <label id="statusFibonacci" style="margin-left: 20px"></label>
+        </p>
+        <p></p>
+        <div>
+          <table id="tests">
+            <tr>
+              <th>Language</th>
+              <th>Time (ms)</th>
+            </tr>
+            <tbody>
+              <tr>
+                <td>JavaScript</td>
+                <td>
+                  <span id="jsPerformanceFibonacci"></span>
+                </td>
+              </tr>
+              <!-- <tr>
+                <td>Go</td>
+                <td>
+                  <span id="goPerformanceFibonacci"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Go (Routine)</td>
+                <td>
+                  <span id="goRoutinePerformanceFibonacci"></span>
+                </td>
+              </tr> -->
+              <tr>
+                <td>TinyGo</td>
+                <td>
+                  <span id="tinygoPerformanceFibonacci"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- <hr /> -->
+    <!-- <section id="sectionPrime">
+      <div>
+        <p>
+          This test executes a function to find a prime number with 3 different
+          ways: JavaScript, Go and TinyGo
+          <br />
+          Insert the number you want to find. It will execute the calculation 5
+          times and take the average.
+        </p>
+      </div>
+      <div>
+        <p>
+          <input type="number" id="numberPrime" style="margin-right: 10px" ; />
+          <button id="runButtonPrime" onclick="startPrime()">Run</button>
+          <label id="statusPrime" style="margin-left: 20px"></label>
+        </p>
+        <p></p>
+        <div>
+          <table id="tests">
+            <tr>
+              <th>Language</th>
+              <th>Time (ms)</th>
+            </tr>
+
+            <tbody>
+              <tr>
+                <td>JavaScript</td>
+                <td>
+                  <span id="jsPerformancePrime"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>Go</td>
+                <td>
+                  <span id="goPerformancePrime"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>TinyGo</td>
+                <td>
+                  <span id="tinygoPerformancePrime"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section> -->
+  </body>
+</html>

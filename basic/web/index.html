@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebAssembly with Go (Basic)</title>
+  </head>
+  <body id="my-body">
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(
+        fetch("main.wasm"),
+        go.importObject
+      ).then((result) => {
+        go.run(result.instance);
+        console.log(greet("Ta2o"));
+        console.log(getCurrentTime());
+      });
+
+      const calculate = () => {
+        const a = parseFloat(document.getElementById("a-side").value);
+        const b = parseFloat(document.getElementById("b-side").value);
+
+        document.getElementById(
+          "result"
+        ).innerText = `ความยาวด้านตรงข้ามมุมฉาก = ${pythagorean(a, b)}`;
+      };
+    </script>
+
+    <input id="a-side" type="number" placeholder="ความยาวด้าน A" />
+    <input id="b-side" type="number" placeholder="ความยาวด้าน B" />
+    <button onclick="calculate()">Calculate</button>
+    <p id="result"></p>
+  </body>
+</html>

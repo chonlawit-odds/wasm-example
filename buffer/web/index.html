@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebAssembly with Go (Buffer)</title>
+  </head>
+  <body>
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(
+        fetch("main.wasm"),
+        go.importObject
+      ).then((result) => {
+        go.run(result.instance);
+
+        // Define data size 10MB
+        const size = 10 * 1024 * 1024;
+        const data = new Uint8Array(size);
+
+        for (let i = 0; i < size; i++) {
+          data[i] = Math.floor(Math.random() * 256); // Sample data
+        }
+
+        // Set buffer
+        setBuffer(data);
+
+        console.log("Before processing: ", data.slice(0, 10));
+
+        // Process buffer
+        processBuffer();
+
+        // Get buffer first 10 items
+        console.log("After processing: ", getBuffer().slice(0, 10));
+      });
+    </script>
+  </body>
+</html>
