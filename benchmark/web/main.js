@@ -56,13 +56,28 @@ const startFibonacci = () => {
   console.log(window);
 
   const availableTests = [
-    { elem: "jsPerformanceFibonacci", func: jsFibonacci, name: "JavaScript" },
+    ////////// Fibonacci recursive
+    // { elem: "jsPerformanceFibonacci", func: jsFibonacci, name: "JavaScript" },
     // { elem: "goPerformanceFibonacci", func: wsGoFibonacci, name: "Go" },
     // {
     //   elem: "goRoutinePerformanceFibonacci",
     //   func: wsGoRoutineFibonacci,
     //   name: "Go (Routine)",
     // },
+    ////////// Fibonacci tail recursive
+    // {
+    //   elem: "jsPerformanceFibonacci",
+    //   func: jsTailFibonacci,
+    //   name: "JavaScript",
+    // },
+    // { elem: "goPerformanceFibonacci", func: wsGoTailFibonacci, name: "Go" },
+    // {
+    //   elem: "goRoutinePerformanceFibonacci",
+    //   func: wsGoRoutineTailFibonacci,
+    //   name: "Go (Routine)",
+    // },
+    ////////// TinyGo
+    { elem: "jsPerformanceFibonacci", func: jsFibonacci, name: "JavaScript" },
     {
       elem: "tinygoPerformanceFibonacci",
       func: wasm.exports.wsTinyFibonacci,
